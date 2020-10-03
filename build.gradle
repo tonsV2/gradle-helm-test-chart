@@ -1,0 +1,28 @@
+buildscript {
+    repositories {
+        mavenLocal()
+// TODO: These needs to be removed
+// Build fat jar
+        maven { url 'https://dl.bintray.com/scottpjohnson/generic/' }
+        maven { url "https://jcenter.bintray.com" }
+    }
+    dependencies {
+        classpath 'dk.fitfit.helm.release:helm-release:1.0.0'
+    }
+}
+
+apply plugin: 'helm-release'
+
+helmRelease {
+    debug = true
+
+    signature {
+        key = "helm"
+    }
+
+    repository {
+        url = "https://helm-charts.fitfit.dk/api/charts"
+        username = System.getenv('REPOSITORY_AUTH_USER')
+        password = System.getenv('REPOSITORY_AUTH_PASS')
+    }
+}
