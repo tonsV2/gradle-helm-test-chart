@@ -14,8 +14,6 @@ buildscript {
 apply plugin: 'helm-release'
 
 helmRelease {
-    debug = true
-
     signature {
         key = "helm"
     }
